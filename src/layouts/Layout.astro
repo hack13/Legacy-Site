@@ -19,25 +19,31 @@ const { title } = Astro.props;
   <body>
     <div
       class="w-full h-screen bg-repeatbg-repeat bg-pink-300"
-      style="background-image: url('images/bg-img.webp');"
+      style="background-image: url('/images/bg-img.webp');"
     >
       <div class="container mx-auto p-4">
         <div class="flex flex-col gap-2">
           <div class="bg-pink-200 border-purple-400 border-4 rounded-md">
-            <img src="images/header.webp" class="p-2 rounded-xl" />
+            <img src="/images/header.webp" class="p-2 rounded-xl" />
             <!-- add pink hr -->
             <hr class="border-purple-400 border-2" />
             <div
               class="grid grid-flow-col auto-cols-max gap-2 px-4 pb-2 pt-2 text-pink-500 justify-center font-bold"
             >
-              <div><a href="#">Home</a></div>
-              <div><a href="">Shrines</a></div>
-              <div><a href="#">Ramblings</a></div>
-              <div><a href="#">Hobbies</a></div>
+              <div><a href="/">Home</a></div>
+              <div><a href="/shrines/">Shrines</a></div>
+              <div>
+                <a href="https://hack13.blog/" target="_blank">Ramblings</a>
+              </div>
+              <div><a href="/hobbies/">Hobbies</a></div>
             </div>
           </div>
           <div class="bg-pink-200 border-purple-400 border-4 rounded-md p-4">
-            <slot />
+            <div
+              class="bg-[url('/images/stars-bg.gif')] p-4 rounded border-2 border-dashed border-purple-400"
+            >
+              <slot />
+            </div>
           </div>
           <div
             class="bg-pink-200 border-purple-400 border-4 rounded-md p-2 text-center"
@@ -48,22 +54,22 @@ const { title } = Astro.props;
             >
               <div>
                 <a href="https://arch.dog/" target="_blank"
-                  ><img src="images/buttons/arch-dog.png" /></a
+                  ><img src="/images/buttons/arch-dog.png" /></a
                 >
               </div>
               <div>
                 <a href="https://brodokk.space/" target="_blank"
-                  ><img src="images/buttons/brodokk-space.webp" /></a
+                  ><img src="/images/buttons/brodokk-space.webp" /></a
                 >
               </div>
               <div>
                 <a href="https://david.garden/" target="_blank"
-                  ><img src="images/buttons/david-garden.webp" /></a
+                  ><img src="/images/buttons/david-garden.webp" /></a
                 >
               </div>
               <div>
                 <a href="https://steffo.dev/" target="_blank"
-                  ><img src="images/buttons/steffo.webp" /></a
+                  ><img src="/images/buttons/steffo.webp" /></a
                 >
               </div>
             </div>
@@ -71,27 +77,27 @@ const { title } = Astro.props;
             <div
               class="grid grid-flow-col auto-cols-max gap-2 p-2 justify-center"
             >
-              <div><img src="images/buttons/anybrowser.webp" /></div>
+              <div><img src="/images/buttons/anybrowser.webp" /></div>
               <div>
                 <a href="https://archlinux.org/" target="_blank"
-                  ><img src="images/buttons/Arch.png" /></a
+                  ><img src="/images/buttons/Arch.png" /></a
                 >
               </div>
-              <div><img src="images/buttons/dothack.png" /></div>
-              <div><img src="images/buttons/dragons.jpg" /></div>
+              <div><img src="/images/buttons/dothack.png" /></div>
+              <div><img src="/images/buttons/dragons.jpg" /></div>
               <div>
                 <a
                   href="https://en.wikipedia.org/wiki/Non-binary_gender"
-                  target="_blank"><img src="images/buttons/enby.png" /></a
+                  target="_blank"><img src="/images/buttons/enby.png" /></a
                 >
               </div>
               <div>
                 <a
                   href="https://jointhefediverse.net/?lang=en-us"
-                  target="_blank"><img src="images/buttons/fediverse.gif" /></a
+                  target="_blank"><img src="/images/buttons/fediverse.gif" /></a
                 >
               </div>
-              <div><img src="images/buttons/gnu-linux.gif" /></div>
+              <div><img src="/images/buttons/gnu-linux.gif" /></div>
             </div>
           </div>
         </div>
