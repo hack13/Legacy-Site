@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+const posts = await getCollection("blog");
+posts.sort((a, b) => dayjs(b.data.published).diff(dayjs(a.data.published)));
+import dayjs from "dayjs";
+---
+
+<Layout title="Blog">
+  <div>
+    {
+      posts.map((post) => (
+        <div>
+          <p class="text-2xl font-bold font-comic">
+            <a href={`/blog${post.data.url}`}>{post.data.title}</a>
+          </p>
+          <p class="text-xs italic font-light">
+            {dayjs(post.data.published).format("MMMM DD, YYYY")}
+          </p>
+          <p class="mb-2 font-comic">
+            {post.data.description}{" "}
+            <a class="underline" href={`/blog${post.data.url}`}>
+              📖 Continue Reading 📖
+            </a>
+          </p>
+        </div>
+      ))
+    }
+  </div>
+</Layout>
