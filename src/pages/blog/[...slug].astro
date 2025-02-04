@@ -1,5 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import dayjs from "dayjs";
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -13,5 +15,19 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<h1>{post.data.title}</h1>
-<Content />
+<Layout title=`Blog - ${post.data.title}`>
+  <div class="flex justify-center w-full">
+    <div>
+      <h1 class="text-3xl text-center font-bold">{post.data.title}</h1>
+      <p class="italic text-center">
+        {dayjs(post.data.published).format("MMMM DD, YYYY")}
+      </p>
+      <br />
+      <article
+        class="prose text-center text-black prose-blockquote:bg-transparent"
+      >
+        <Content />
+      </article>
+    </div>
+  </div>
+</Layout>
