@@ -1,6 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
-import Layout from "../../layouts/Blog.astro";
+import Layout from "../../layouts/Layout.astro";
 import dayjs from "dayjs";
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
@@ -16,18 +16,51 @@ const { Content } = await render(post);
 ---
 
 <Layout title=`Blog - ${post.data.title}`>
-  <div class="flex justify-stretch justify-self-center">
-    <div>
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="flex flex-col items-center">
       <h1 class="text-3xl text-center font-bold">{post.data.title}</h1>
       <p class="italic text-center">
         {dayjs(post.data.published).format("MMMM DD, YYYY")}
       </p>
       <br />
       <article
-        class="prose text-black prose-blockquote:bg-transparent"
+        class="prose text-black prose-blockquote:bg-transparent w-full"
       >
         <Content />
       </article>
+      <div class="flex flex-col gap-4 mt-8 items-center">
+        <form class="fsb-prompt">
+          <label>Share this page from your <a href="https://jointhefediverse.net/">fediverse</a> server</label>
+          <div class="fsb-input-group mb-3">
+            <span class="fsb-input-group-text">https://</span>
+            <input required
+              type="text"
+              name="fediverse-domain"
+              placeholder="mastodon.social"
+              class="fsb-input fsb-domain"
+              aria-label="Server domain">
+            <button class="fsb-button flex items-center justify-center gap-2"
+              type="submit">
+              <img src="/images/fediverse-svgrepo-com.svg" class="w-10 h-10 -mx-6 -my-6"/>
+              <span class="text-sm my-2">Share</span>
+            </button>
+          </div>
+          <p class="fsb-support-note fsb-d-none">This server does not support sharing. Please visit <a
+              class="fsb-support-note-link"
+              target="_blank"
+              href=""></a>.</p>
+        </form>
+        <a
+          href={`https://bsky.app/intent/compose?text=${encodeURIComponent(post.data.title + ' ' + Astro.url.href)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+        >
+          Share on Bluesky
+        </a>
+      </div>
     </div>
   </div>
+  <link rel="stylesheet" href="https://fediverse-share-button.stefanbohacek.dev/fediverse-share-button/styles.min.css">
+  <script src="https://fediverse-share-button.stefanbohacek.dev/fediverse-share-button/script.min.js" defer class="fsb-script"></script>
 </Layout>
