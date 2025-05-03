@@ -1,4 +1,8 @@
-/.well-known/matrix/*
+/.well-known/matrix/client
+  X-Content-Type-Options: nosniff
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+/.well-known/matrix/server
   X-Content-Type-Options: nosniff
   Content-Type: application/json
   Access-Control-Allow-Origin: *
