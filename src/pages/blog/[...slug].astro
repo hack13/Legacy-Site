@@ -22,7 +22,15 @@ const { Content } = await render(post);
       <p class="italic text-center">
         {dayjs(post.data.published).format("MMMM DD, YYYY")}
       </p>
-      <br />
+      {post.data.audioUrl && (
+        <>
+          <br />
+          <p class="text-center text-sm">Listen to the audio version of this post</p>
+          <audio controls>
+            <source src={post.data.audioUrl} type="audio/mpeg" />
+          </audio>
+        </>
+      )}
       <article
         class="prose text-black prose-blockquote:bg-transparent w-full"
       >
