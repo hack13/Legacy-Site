@@ -2,78 +2,52 @@
 import Layout from "../../layouts/Layout.astro";
 ---
 
-<Layout title=".hack// - Hack13">
+<Layout title="SL and OpenSim - Hack13">
   <main class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-8 text-pink-500">.hack// Franchise</h1>
-
+    <h1 class="text-3xl font-bold mb-8 text-pink-500">
+      SecondLife &amp; OpenSim
+    </h1>
+    <h3 class="text-2xl font-semibold mb-4 text-purple-600">SecondLife</h3>
     <p class="text-gray-900">
-      This game is where my name comes from. I have been a fan of the of the
-      .hack// franchise since I was 13 years old. This is sadly but true, how I
-      came up with my name "hack13". I have a lot of fond memories of playing
-      the games, watching the anime, and reading the managa and novels. I have a
-      lot of nostalgia for the series and it has a special place in my heart.
+      SecondLife will always have a deep place in in my heart because I am
+      someone who got my start playing in late teens. It is also where I first
+      found the furry community, and fell down that rabbit hole. It also was a
+      place that played into my childhood dreams of virtual worlds, something I
+      had always kinda dreamed of. This kinda was some of the first bits of
+      getting into scripting, learning to code, and even wanting to learn more
+      about computers to make things like SecondLife.
     </p>
+    <img
+      src="/images/secondlife-1.webp"
+      alt="SecondLife Screenshot"
+      class="mt-4 rounded-lg shadow-lg"
+    />
+    <tt class="text-sm center text-gray-600"
+      >A screenshot of my avatar in SecondLife, with my guilty pleasure gambling
+      on OnLive SL Client.</tt
+    >
     <br />
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="flex flex-col items-center">
-        <img
-          src="/images/shrines/dockers-net-site.webp"
-          alt="old dothackers.net site"
-          class="mb-4"
-        />
-      </div>
-      <div class="flex flex-col">
-        <p class="text-gray-900">
-          One of the biggest sites when I was younger, that is sorta still
-          around but just as a forum. It is DotHackersNetwork, which can be
-          found at
-          <a
-            href="https://www.dothackers.net"
-            class="text-blue-500 hover:underline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            dothackers.net
-          </a>. It was a place where I could find all sorts of content, and
-          wallpapers for the .hack// series. I have a lot of fond memories of
-          the site and the community that was there. I have a lot of nostalgia
-          for the site.
-        </p>
-        <br />
-        <p>
-          As you can see from the image, it was a very different time in web
-          design. The site was very artistic and the donate button in order to
-          afford the hosting costs. I remember seeing the site and thinking how
-          cool it was to have a site dedicated to .hack//. It was my place where
-          I kept up with the latest news and content for the series. It was a
-          great place to find lore, leaks of the G.U. series that was coming
-          out, and even fan art. I remember checking this site pretty much every
-          day when I got online.
-        </p>
-        <br />
-        <img
-          src="/images/shrines/hacksign05.webp"
-          alt="dothack sign screencap"
-          class="w-auto"
-        />
-      </div>
-    </div>
+    <h3 class="text-2xl mt-4 font-semibold mb-4 text-purple-600">
+      OpenSimulator
+    </h3>
+    <p class="text-gray-900">
+      So with that growth and love of virtual worlds, I started to get more
+      involved in OpenSimulator, which is an open source project that is a
+      server-side application that is compatible with the SecondLife client. It
+      was something that allowed me to have more control over my virtual world
+      experience, and also allowed me to learn more about server management. It
+      was also where I got my first start of being a freelance developer, and
+      doing work managing virtual worlds for others.
+    </p>
+    <img
+      src="/images/opensim-1.webp"
+      alt="OpenSimulator Screenshot"
+      class="mt-4 rounded-lg shadow-lg"
+    />
+    <tt class="text-sm center text-gray-600"
+      >A screenshot of my avatar in my first grid I setup called CyberWrld(long
+      defunct)</tt
+    >
+    <br />
   </main>
-
-  <script>
-    // Add click handlers for copy buttons
-    document.querySelectorAll("button").forEach((button) => {
-      button.addEventListener("click", function () {
-        const textarea = this.previousElementSibling as HTMLTextAreaElement;
-        navigator.clipboard.writeText(textarea.value);
-
-        // Visual feedback
-        const originalText = this.textContent;
-        this.textContent = "Copied!";
-        setTimeout(() => {
-          this.textContent = originalText;
-        }, 2000);
-      });
-    });
-  </script>
 </Layout>

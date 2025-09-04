@@ -1,44 +1,112 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
+import BlogCard from "../components/BlogCard.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("blog");
+const posts = allPosts
+  .filter((p) => !p.data?.draft)
+  .sort((a, b) => +new Date(b.data.published) - +new Date(a.data.published))
+  .slice(0, 2);
 ---
 
 <Layout title="HACK13 - Just a Fox on the Internet">
-    <p class="font-bold text-2xl">Hi I'm Hack13!</p>
-    <p>I am just a fox on the internet that has lots of silly little hobbies and loves tinker. I homelab, code, and play VR. I also have a couple different sonas.</p>
-    <br />
-    <p class="font-bold text-2xl">My Sonas</p>
-    <div class="flex flex-row border-t-4 border-x-4 border-purple-500 justify-between p-4">
-        <div>
-            <p class="font-bold text-xl">Hack</p>
-            <p><strong>Species:</strong> Fox</p>
-            <p><strong>Gender:</strong> Non-binary</p>
-            <p><strong>Pronouns:</strong> They/Them</p>
-            <p><strong>Personality:</strong> A fox with a love for technology and a passion for learning.</p>
-            <p><strong>Notes:</strong> This is my main sona and the one I identify with the most these days.</p>
-        </div>
-        <div><img src="https://storj.hack13.download/cdn/art/Hack%20Badge.webp" class="w-44" alt="Sona 1" /></div>
+  <p class="font-bold text-2xl">Hi I'm Hack13!</p>
+  <p>
+    I am just a fox on the internet that has lots of silly little hobbies and
+    loves tinker. I homelab, code, and play VR. I also have a couple different
+    sonas.
+  </p>
+  <div class="bg-pink-200 border-purple-400 border-4 rounded-md p-4 mt-4">
+    <p class="font-bold text-2xl">Latest Ramblings</p>
+    <ul class="grid gap-2 mt-2">
+      {
+        posts.map((post) => (
+          <BlogCard
+            title={post.data.title}
+            body={post.data.description ?? ""}
+            href={`/blog/${post.id}/`}
+            date={post.data.published?.toISOString()}
+          />
+        ))
+      }
+    </ul>
+    <div class="text-right mt-2">
+      <a href="/blog/" class="text-pink-600 font-bold">See all Ramblings →</a>
     </div>
-    <div class="flex flex-row border-4 border-purple-500 justify-between p-4">
-        <div><img src="https://storj.hack13.download/cdn/art/Nardo%20PFP%20%28shareable%29.webp" class="w-44 rounded-md" alt="Sona 2" /></div>
-        <div>
-            <p class="font-bold text-xl">Hack the Nardo</p>
-            <p><strong>Species:</strong> Nardoragon</p>
-            <p><strong>Gender:</strong> Female</p>
-            <p><strong>Pronouns:</strong> She/Her</p>
-            <p><strong>Personality:</strong> A bit of a dominant nardoragon that loves be flirty and techy.</p>
-            <p><strong>Notes:</strong> This is my sonas that I use when I want to be a bit more flirty and dominant.</p>
-        </div>
+  </div>
+  <p class="font-bold mt-4 text-2xl">My Sonas</p>
+  <div
+    class="flex flex-row border-t-4 border-x-4 border-purple-500 justify-between p-4"
+  >
+    <div>
+      <p class="font-bold text-xl">Hack</p>
+      <p><strong>Species:</strong> Fox</p>
+      <p><strong>Gender:</strong> Non-binary</p>
+      <p><strong>Pronouns:</strong> They/Them</p>
+      <p>
+        <strong>Personality:</strong> A fox with a love for technology and a passion
+        for learning.
+      </p>
+      <p>
+        <strong>Notes:</strong> This is my main sona and the one I identify with
+        the most these days.
+      </p>
     </div>
-    <div class="flex flex-row border-b-4 border-x-4 border-purple-500 justify-between p-4">
-        <div>
-            <p class="font-bold text-xl">Timothy Vyper</p>
-            <p><strong>Species:</strong> Fox</p>
-            <p><strong>Gender:</strong> Male</p>
-            <p><strong>Pronouns:</strong> He/Him</p>
-            <p><strong>Personality:</strong> A fox with a love for technology and a passion for learning.</p>
-            <p><strong>Notes:</strong> This was my main sona for several years of my life and back when I was in a darker time of my life.</p>
-        </div>
-        <div><img src="/images/sonas/icon-sparkle.png" class="w-44 rounded-xl" alt="Sona 2" /></div>
+    <div>
+      <img
+        src="https://storj.hack13.download/cdn/art/Hack%20Badge.webp"
+        class="w-44"
+        alt="Sona 1"
+      />
     </div>
+  </div>
+  <div class="flex flex-row border-4 border-purple-500 justify-between p-4">
+    <div>
+      <img
+        src="https://storj.hack13.download/cdn/art/Nardo%20PFP%20%28shareable%29.webp"
+        class="w-44 rounded-md"
+        alt="Sona 2"
+      />
+    </div>
+    <div>
+      <p class="font-bold text-xl">Hack the Nardo</p>
+      <p><strong>Species:</strong> Nardoragon</p>
+      <p><strong>Gender:</strong> Female</p>
+      <p><strong>Pronouns:</strong> She/Her</p>
+      <p>
+        <strong>Personality:</strong> A bit of a dominant nardoragon that loves be
+        flirty and techy.
+      </p>
+      <p>
+        <strong>Notes:</strong> This is my sonas that I use when I want to be a bit
+        more flirty and dominant.
+      </p>
+    </div>
+  </div>
+  <div
+    class="flex flex-row border-b-4 border-x-4 border-purple-500 justify-between p-4"
+  >
+    <div>
+      <p class="font-bold text-xl">Timothy Vyper</p>
+      <p><strong>Species:</strong> Fox</p>
+      <p><strong>Gender:</strong> Male</p>
+      <p><strong>Pronouns:</strong> He/Him</p>
+      <p>
+        <strong>Personality:</strong> A fox with a love for technology and a passion
+        for learning.
+      </p>
+      <p>
+        <strong>Notes:</strong> This was my main sona for several years of my life
+        and back when I was in a darker time of my life.
+      </p>
+    </div>
+    <div>
+      <img
+        src="/images/sonas/icon-sparkle.png"
+        class="w-44 rounded-xl"
+        alt="Sona 2"
+      />
+    </div>
+  </div>
 </Layout>
