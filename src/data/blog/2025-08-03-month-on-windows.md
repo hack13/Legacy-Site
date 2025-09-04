@@ -3,7 +3,7 @@ title: A Month On Windows 11
 description: So it has been about a month since I moved to trying Windows as my daily driver. I have to say, it hasn't been all bad, but I have noticed what I do with my computer had changed a lot based on what machine I was on. Starting out...
 tags: [Personal, Opinion]
 published: 2025-08-04
-url: /2025/07/back-on-windows
+url: /2025/08/month-on-win11
 category: Thoughts
 draft: false
 audioUrl: https://g0d30pe4t9.ufs.sh/f/fFbcT5Ll6ojdJY7BWLTFmUQbhknZoASE3K675RMidxeLvCVN
