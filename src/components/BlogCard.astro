@@ -1,0 +1,81 @@
+---
+interface Props {
+  title: string;
+  body?: string;
+  href: string;
+  date?: string;
+}
+
+const { title, body = "", href, date } = Astro.props;
+---
+
+<li class="blog-card">
+  <a href={href}>
+    <h3 class="card-title text-2xl font-bold">
+      {title}
+      <span class="arrow">→</span>
+    </h3>
+    {
+      date ? (
+        <div class="card-date">
+          <time datetime={date}>{new Date(date).toLocaleDateString()}</time>
+        </div>
+      ) : null
+    }
+
+    <p class="card-body">{body}</p>
+  </a>
+</li>
+
+<style>
+  .blog-card {
+    list-style: none;
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 182, 193, 0.06),
+      rgba(98, 0, 234, 0.04)
+    );
+    border: 1px solid rgba(139, 92, 246, 0.12);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  }
+  .blog-card > a {
+    display: block;
+    padding: 1rem;
+    color: rgb(17, 24, 39);
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.02);
+  }
+  .card-date {
+    font-size: 0.85rem;
+    color: rgb(99, 102, 241);
+    margin-bottom: 0.35rem;
+  }
+  .card-title {
+    margin: 0;
+    font-size: 1.05rem;
+    color: rgb(88, 28, 135);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .arrow {
+    color: rgb(219, 39, 119);
+    font-weight: 700;
+    margin-left: 0.5rem;
+  }
+  .card-body {
+    margin-top: 0.5rem;
+    color: rgb(30, 30, 30);
+    opacity: 0.95;
+    margin-bottom: 0;
+  }
+  .blog-card:is(:hover, :focus-within) {
+    transform: translateY(-3px);
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  }
+</style>
