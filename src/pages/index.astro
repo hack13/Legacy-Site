@@ -25,7 +25,7 @@ const posts = allPosts
           <BlogCard
             title={post.data.title}
             body={post.data.description ?? ""}
-            href={`/blog/${post.id}/`}
+            href={`/blog${post.data.url}/`}
             date={post.data.published?.toISOString()}
           />
         ))
