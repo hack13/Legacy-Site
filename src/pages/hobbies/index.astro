@@ -2,24 +2,39 @@
 import Layout from "../../layouts/Layout.astro";
 ---
 
-<Layout title="Shrines">
+<Layout title="Hobbies">
   <h1 class="text-3xl font-bold text-center mb-4 font-comic">
-    ✨ Shrines To My Favorites ✨
+    🐾 My Hobbies 🐾
   </h1>
 
   <p class="mb-6 text-center">
-    This page sections out places I have a fondness for or used to have a huge
-    love for.
+    This page sections out the stuff I have done in my personal life, and stuff
+    I work on or just jive doing.
   </p>
-  <div class="flex justify-center">
-    <button class="bg-pink-500 text-white px-4 py-2 rounded-md">
-      <a href="/hobbies/furry-fediverse">Furry Fediverse</a>
-    </button>
-    <button class="bg-pink-500 text-white px-4 py-2 rounded-md">
-      <a href="/hobbies/shorts">Shortform Videos</a>
-    </button>
-    <button class="bg-pink-500 text-white px-4 py-2 rounded-md">
-      <a href="/hobbies/longform-videos">Longform Videos</a>
-    </button>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 px-14 justify-center">
+    <a
+      href="/hobbies/artwork"
+      class="bg-pink-500 text-white px-4 py-2 rounded-md text-center"
+    >
+      Sona Artwork
+    </a>
+    <a
+      href="/hobbies/dev-stuff"
+      class="bg-pink-500 text-white px-4 py-2 rounded-md text-center"
+    >
+      Development Projects
+    </a>
+    <a
+      href="/hobbies/self-hosting"
+      class="bg-pink-500 text-white px-4 py-2 rounded-md text-center"
+    >
+      Self-Hosting
+    </a>
+    <a
+      href="/hobbies/vr-exploration"
+      class="bg-pink-500 text-white px-4 py-2 rounded-md text-center"
+    >
+      Virtual Reality
+    </a>
   </div>
 </Layout>
