@@ -3,7 +3,7 @@ title: Online Privacy & Age Verification
 description: So I have been reading a lot of stuff online lately, and feeling the age verification arguments with the concerns over privacy, having to prove your age stuff. There is a lot to dig into here, and I feel it is important to kind of share my...
 tags: [Personal, Opinion]
 published: 2026-03-30
-url: /2026/02/decentralization-and-fracturing
+url: /2026/03/online-privacy-age-verification
 category: Thoughts
 draft: false
 ---
