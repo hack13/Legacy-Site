@@ -1,0 +1,40 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node
+{
+	"name": "Node.js",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:4-bookworm",
+
+		// REQUIRED for Podman: maps host UID -> container UID so file perms match
+	"runArgs": [
+		"--userns=keep-id"
+	],
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/node:2": {
+			"pnpmVersion": "latest"
+		}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	//"postCreateCommand": "pnpm install"
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	"workspaceFolder": "/workspace/${localWorkspaceFolderBasename}",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace/Legacy-Site,type=bind,Z",
+
+	// Use the non-root user that the base image provides
+	"remoteUser": "node",
+	"containerUser": "node",
+	"containerEnv": {
+		"HOME": "/home/node"
+	},
+
+
+}
