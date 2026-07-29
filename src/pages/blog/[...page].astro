@@ -21,7 +21,10 @@ const { page } = Astro.props;
 const posts = page.data;
 ---
 
-<Layout title="Blog">
+<Layout
+    title="Blog"
+    description="A fox rambling about tech, games, and life."
+>
     <div>
         {
             posts.map((post) => (
@@ -31,6 +34,7 @@ const posts = page.data;
                     </p>
                     <p class="text-xs italic font-light">
                         {dayjs(post.data.published).format("MMMM DD, YYYY")}
+                        {post.data.category && ` · ${post.data.category}`}
                     </p>
                     <p class="mb-2 font-comic">
                         {post.data.description}{" "}

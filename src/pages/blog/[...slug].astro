@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import dayjs from "dayjs";
+import { postImagePath } from "../../lib/posts";
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -15,7 +16,16 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout title=`Blog - ${post.data.title}`>
+<Layout
+  title={`Blog - ${post.data.title}`}
+  socialTitle={post.data.title}
+  description={post.data.description}
+  image={postImagePath(post)}
+  imageAlt={post.data.imageAlt}
+  type="article"
+  publishedTime={post.data.published}
+  tags={post.data.tags}
+>
   <div class="max-w-4xl mx-auto px-4">
     <div class="flex flex-col items-center">
       <h1 class="text-3xl text-center font-bold">{post.data.title}</h1>

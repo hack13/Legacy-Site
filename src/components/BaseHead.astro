@@ -1,0 +1,104 @@
+---
+import {
+  FEDIVERSE_CREATOR,
+  OG_DEFAULT_IMAGE,
+  OG_HEIGHT,
+  OG_ROUTE_PREFIX,
+  OG_WIDTH,
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+  SITE_URL,
+} from "../consts";
+
+interface Props {
+  title: string;
+  /** Shown in link previews when the browser tab title is too verbose for them. */
+  socialTitle?: string;
+  description?: string;
+  /** Root-relative path, e.g. "/og/2026/04/thing.webp". */
+  image?: string;
+  imageAlt?: string;
+  type?: "website" | "article";
+  publishedTime?: Date;
+  tags?: string[];
+}
+
+const {
+  title,
+  socialTitle = title,
+  description = SITE_DESCRIPTION,
+  image = OG_DEFAULT_IMAGE,
+  imageAlt,
+  type = "website",
+  publishedTime,
+  tags,
+} = Astro.props;
+
+// In `astro dev`, Astro.site is still the production host, but the generated
+// cards are only served from this origin. Point meta tags at what actually
+// resolves so local (and any future preview) link previews can render.
+const site = import.meta.env.DEV
+  ? new URL(Astro.url.origin)
+  : (Astro.site ?? new URL(SITE_URL));
+const canonical = new URL(Astro.url.pathname, site);
+const imageUrl = new URL(image, site).href;
+const feedUrl = new URL("/blog/rss.xml", site).href;
+
+// Only cards we generate ourselves have a size we can promise up front.
+const isGeneratedCard = image.startsWith(OG_ROUTE_PREFIX);
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical.href} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={`${SITE_TITLE} Ramblings`}
+  href={feedUrl}
+/>
+
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={SITE_TITLE} />
+<meta property="og:title" content={socialTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical.href} />
+<meta property="og:locale" content="en_US" />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:alt" content={imageAlt ?? socialTitle} />
+{
+  isGeneratedCard && (
+    <>
+      <meta property="og:image:type" content="image/webp" />
+      <meta property="og:image:width" content={String(OG_WIDTH)} />
+      <meta property="og:image:height" content={String(OG_HEIGHT)} />
+    </>
+  )
+}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={socialTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:image:alt" content={imageAlt ?? socialTitle} />
+
+<!-- Lets Mastodon credit the author on link previews. -->
+<meta name="fediverse:creator" content={FEDIVERSE_CREATOR} />
+
+{
+  type === "article" && publishedTime && (
+    <meta
+      property="article:published_time"
+      content={publishedTime.toISOString()}
+    />
+  )
+}
+{
+  type === "article" &&
+    tags?.map((tag) => <meta property="article:tag" content={tag} />)
+}

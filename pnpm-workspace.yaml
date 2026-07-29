@@ -1,0 +1,6 @@
+# pnpm 11+ asks whether dependencies may run install scripts. Astro's esbuild and
+# sharp both resolve their native binaries through optional platform packages, so
+# the site builds correctly without them.
+allowBuilds:
+  esbuild: false
+  sharp: false
