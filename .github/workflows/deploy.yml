@@ -1,0 +1,50 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          # Match local pnpm 11 so pnpm-workspace.yaml allowBuilds is honored
+          version: 11
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build site
+        run: pnpm build
+
+      - name: Upload dist with Cyberduck CLI
+        uses: iterate-ch/cyberduck-cli-action@main
+        id: upload
+        env:
+          USERNAME: ${{ secrets.DEPLOY_USERNAME }}
+          PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
+        with:
+          mode: upload
+          # Destination URL for duck (e.g. s3:/bucket/path/, ftps://host/path/, sftp://host/path/)
+          url: ${{ secrets.DEPLOY_URL }}
+          path: dist/*
