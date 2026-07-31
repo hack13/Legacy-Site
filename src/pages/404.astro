@@ -1,0 +1,48 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="404 - HACK13"
+  description="Whoops — this page wandered off into the void."
+>
+  <h1 class="text-3xl font-bold text-center mb-4 font-comic">
+    🐾 404 — Page Not Found 🐾
+  </h1>
+
+  <p class="mb-2 text-center text-xl font-bold text-pink-600">
+    Looks like this fox dug the wrong hole.
+  </p>
+
+  <p class="mb-6 text-center">
+    The page you're looking for doesn't exist, got renamed, or scampered off
+    somewhere else. Try one of these instead:
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 px-14 justify-center">
+    <a
+      href="/"
+      class="bg-pink-500 text-white px-4 py-2 rounded-md text-center"
+    >
+      Home
+    </a>
+    <a
+      href="/blog/"
+      class="bg-pink-500 text-white px-4 py-2 rounded-md text-center"
+    >
+      Ramblings
+    </a>
+    <a
+      href="/shrines/"
+      class="bg-pink-500 text-white px-4 py-2 rounded-md text-center"
+    >
+      Shrines
+    </a>
+    <a
+      href="/hobbies/"
+      class="bg-pink-500 text-white px-4 py-2 rounded-md text-center"
+    >
+      Hobbies
+    </a>
+  </div>
+</Layout>

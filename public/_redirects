@@ -1,2 +1,5 @@
 /.well-known/matrix/client /.well-known/matrix/client.json 200
 /.well-known/matrix/server /.well-known/matrix/server.json 200
+
+# Serve the themed 404 page for unknown routes (Cloudflare Pages / Netlify)
+/* /404.html 404
