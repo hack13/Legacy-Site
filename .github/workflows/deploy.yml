@@ -37,14 +37,12 @@ jobs:
       - name: Build site
         run: pnpm build
 
-      - name: Upload dist with Cyberduck CLI
-        uses: iterate-ch/cyberduck-cli-action@main
-        id: upload
-        env:
-          USERNAME: ${{ secrets.DEPLOY_USERNAME }}
-          PASSWORD: ${{ secrets.DEPLOY_PASSWORD }}
+      - name: Upload dist via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
-          mode: upload
-          # Destination URL for duck (e.g. s3:/bucket/path/, ftps://host/path/, sftp://host/path/)
-          url: ${{ secrets.DEPLOY_URL }}
-          path: dist/*
+          server: ${{ secrets.DEPLOY_SERVER }}
+          username: ${{ secrets.DEPLOY_USERNAME }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          protocol: ${{ secrets.DEPLOY_PROTOCOL }}
+          local-dir: dist/
+          server-dir: /public_html/
